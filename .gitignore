@@ -1,0 +1,12 @@
+Gestao/migrations/__init__.py
+Gestao/migrations/0001_initial.py
+Gestao/migrations/0002_animal_mae_animal_pai_alter_animal_raca.py
+Gestao/migrations/0003_alter_animal_pedigree.py
+Gestao/migrations/0004_alter_alimentacao_tipo_alimento.py
+Gestao/migrations/0005_animal_sexo.py
+Gestao/migrations/__pycache__/__init__.cpython-311.pyc
+Gestao/migrations/__pycache__/0001_initial.cpython-311.pyc
+Gestao/migrations/__pycache__/0002_animal_mae_animal_pai_alter_animal_raca.cpython-311.pyc
+Gestao/migrations/__pycache__/0003_alter_animal_pedigree.cpython-311.pyc
+Gestao/migrations/__pycache__/0004_alter_alimentacao_tipo_alimento.cpython-311.pyc
+Gestao/migrations/__pycache__/0005_animal_sexo.cpython-311.pyc
