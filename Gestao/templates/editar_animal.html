@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Editar Animal</h1>
+  <form method="post" action="{% url 'Gestao:editar_animal' animal.id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Salvar</button>
+  </form>
+{% endblock %}

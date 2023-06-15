@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Lista de Animais</h1>
+  {% if animais %}
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      {% for animal in animais %}
+        <div class="col">
+          <div class="card h-100 w-100">
+            <div class="card-header">
+              <h5 class="card-title mb-0">Animal #{{ animal.numero_identificacao }}</h5>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-4">
+                  <img src="https://www.girodoboi.com.br/wp-content/uploads/2020/09/pelagem-nelore-escurece-acinzentada-motivo.jpg" class="img-fluid rounded" alt="Foto do Animal">
+                </div>
+                <div class="col-md-8">
+                  <h6 class="card-subtitle mb-2">Informações Gerais</h6>
+                  <p class="card-text"><strong>Nome:</strong> {{ animal.numero_identificacao }}</p>
+                  <p class="card-text"><strong>Data de Nascimento:</strong> {{ animal.data_nascimento }}</p>
+                  <p class="card-text"><strong>Descendentes:</strong> {{ animal.descendentes }}</p>
+                  <p class="card-text"><strong>Filhos:</strong> {{ animal.filhos }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <h6 class="card-subtitle mb-2"><strong>Histórico Genético</strong></h6>
+              <p class="card-text">{{ animal.historico_genetico }}</p>
+              <p class="card-text"><strong>Abate:</strong> {{ animal.abate }}</p>
+              <p class="card-text"><strong>Alimentação:</strong> {{ animal.alimentacao }}</p>
+              <p class="card-text"><strong>Economia:</strong> {{ animal.economia }}</p>
+              <p class="card-text"><strong>Filhos da Mãe:</strong> {{ animal.filhos_mae }}</p>
+              <p class="card-text"><strong>Filhos do Pai:</strong> {{ animal.filhos_pai }}</p>
+            </div>
+            <div class="card-body">
+              <h6 class="card-subtitle mb-2">Outras Informações</h6>
+              <p class="card-text"><strong>ID:</strong> {{ animal.id }}</p>
+              <p class="card-text"><strong>Mãe:</strong> {{ animal.mae }}</p>
+              <p class="card-text"><strong>ID da Mãe:</strong> {{ animal.mae_id }}</p>
+              <p class="card-text"><strong>Movimentações:</strong> {{ animal.movimentacoes }}</p>
+              <p class="card-text"><strong>Observações:</strong> {{ animal.observacoes }}</p>
+              <p class="card-text"><strong>Pai:</strong> {{ animal.pai }}</p>
+              <p class="card-text"><strong>ID do Pai:</strong> {{ animal.pai_id }}</p>
+              <p class="card-text"><strong>Pedigree:</strong> {{ animal.pedigree }}</p>
+              <p class="card-text"><strong>Pesos:</strong> {{ animal.pesos.peso }}</p>
+            </div>
+            <div class="card-footer">
+              <p class="card-text"><strong>Raça:</strong> {{ animal.raca }}</p>
+              <p class="card-text"><strong>Reprodução:</strong> {{ animal.reproducao }}</p>
+              <p class="card-text"><strong>Saúde:</strong> {{ animal.saude }}</p>
+              <p class="card-text"><strong>Sexo:</strong> {{ animal.sexo }}</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>Nenhum animal encontrado.</p>
+  {% endif %}
+{% endblock %}

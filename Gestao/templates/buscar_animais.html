@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Buscar Animais</h1>
+  <form method="get" action="{% url 'Gestao:buscar_animais' %}">
+    <input type="text" name="search_query" placeholder="Digite o nome do animal">
+    <button type="submit">Buscar</button>
+  </form>
+  
+  {% if animais %}
+    <h2>Resultados da Busca</h2>
+    <ul>
+      {% for animal in animais %}
+        <li>{{ animal.nome }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}

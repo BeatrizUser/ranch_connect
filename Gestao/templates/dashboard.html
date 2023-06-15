@@ -1,171 +1,72 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Dashboard</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        /* Adicione estilos personalizados aqui */
-        .sidebar {
-            transition: width 0.3s;
-        }
-        
-        .sidebar:hover {
-            width: 250px;
-        }
-        
-        .sidebar-sticky {
-            padding-top: 20px;
-        }
-        
-        .nav-item {
-            transition: background-color 0.3s;
-        }
-        
-        .nav-item:hover {
-            background-color: #f8f9fa;
-        }
-        
-        .nav-link {
-            display: flex;
-            align-items: center;
-            padding: 8px 16px;
-        }
-        
-        .nav-link.active {
-            background-color: #007bff;
-            color: #fff;
-        }
-        
-        .nav-link.active:hover {
-            background-color: #007bff;
-        }
-        
-        .sidebar-icon {
-            margin-right: 8px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container-fluid">
-        <div class="row">
-            <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
-                <div class="sidebar-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">
-                                <i class="sidebar-icon fas fa-chart-bar"></i>
-                                Dashboard
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="sidebar-icon fas fa-clipboard-list"></i>
-                                Animais
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="sidebar-icon fas fa-chart-line"></i>
-                                Gráficos
-                            </a>
-                        </li>
-                    </ul>
+<!-- dashboard.html -->
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <h1 class="mt-4">Dashboard</h1>
+    <div class="row">
+        <div class="col-lg-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Quantidade de Animais</h5>
+                    <p class="card-text">{{ quantidade_animais }}</p>
                 </div>
-            </nav>
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-                <h1 class="mt-4">Dashboard</h1>
-                            <div class="row">
-                                <div class="col-lg-4 mb-4">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Quantidade de Animais</h5>
-                                            <p class="card-text">{{ quantidade_animais }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 mb-4">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Valor Atual do @</h5>
-                                            <p class="card-text" id="valorAtual">{{ valor_atual }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 mb-4">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Média por Cabeça</h5>
-                                            <p class="card-text">{{ media_valor }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- ---- -->
-                            <div class="row mt-4">
-                                <div class="col-lg-6">
-                                        <h2>Animais</h2>
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Identificação</th>
-                                                    <th>Raça</th>
-                                                    <th>Data de Nascimento</th>
-                                                    <th>Sexo</th>
-                                                    <th>Peso</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {% for animal in animals %}
-                                                    <tr>
-                                                        <td>{{ animal.id }}</td>
-                                                        <td>{{ animal.numero_identificacao }}</td>
-                                                        <td>{{ animal.get_raca_display }}</td>
-                                                        <td>{{ animal.data_nascimento }}</td>
-                                                        <td>{{ animal.sexo }}</td>
-                                                        <td>{{ animal.pesos.last.peso|floatformat:0}}@</td>
-                                                    </tr>
-                                                {% endfor %}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <h2>Gráficos</h2>
-                                    <canvas id="animalChart"></canvas>
-                                    <canvas id="populationChart"></canvas>
-                                </div>
-                            </div>
-                        </main>
-                        </div>
-                        </div>
-                    </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Valor Atual do @</h5>
+                    <p class="card-text" id="valorAtual">{{ valor_atual }}</p>
                 </div>
-            </main>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Média por Cabeça</h5>
+                    <p class="card-text">{{ media_valor }}</p>
+                </div>
+            </div>
         </div>
     </div>
-
+    <!-- ---- -->
+    <div class="row mt-4">
+        <div class="col-lg-6">
+            <h2>Animais</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Identificação</th>
+                        <th>Raça</th>
+                        <th>Data de Nascimento</th>
+                        <th>Sexo</th>
+                        <th>Peso</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for animal in animals %}
+                        <tr>
+                            <td>{{ animal.id }}</td>
+                            <td>{{ animal.numero_identificacao }}</td>
+                            <td>{{ animal.get_raca_display }}</td>
+                            <td>{{ animal.data_nascimento }}</td>
+                            <td>{{ animal.sexo }}</td>
+                            <td>{{ animal.pesos.last.peso|floatformat:0}}@</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-6">
+            <h2>Gráficos</h2>
+            <canvas id="animalChart"></canvas>
+            <canvas id="populationChart"></canvas>
+        </div>
+    </div>
     <script>
-        function getArrobaValue() {
-            // Faz a consulta à API
-            fetch('https://www.scotconsultoria.com.br/json/corteva/?cotacao=boigordo')
-                .then(response => response.json())
-                .then(data => {
-                    // Obtém os valores de interesse
-                    console.log(data)
-                    const cotacoes = data.Cotacao;
-                    const valores = cotacoes[6].Reais_Avista;
-
-                    // Exibe os valores na página
-                    document.getElementById('valorAtual').textContent = `Valor Atual: R$ ${valores}`;                })
-                .catch(error => console.error('Erro ao consultar a API:', error));
-        }
-
-        // Chamada da função ao carregar a página
-        getArrobaValue();
-
         var animalLabels = [];
         var animalData = [];
 
@@ -254,5 +155,4 @@
             options: populationChartOptions
         });
     </script>
-</body>
-</html>
+{% endblock %}

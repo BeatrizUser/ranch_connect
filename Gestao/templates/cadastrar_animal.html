@@ -1,0 +1,78 @@
+<!-- cadastrar_animal.html -->
+{% extends 'base.html' %}
+
+{% block title %}Cadastrar Animal{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <form method="POST" action="{% url 'cadastrar_animal' %}">
+        {% csrf_token %}
+
+        <h1>Cadastrar Animal</h1>
+
+        <!-- Informações do Animal -->
+        <fieldset>
+            <legend>Informações do Animal</legend>
+            <div class="form-group">
+                <label for="id_animal_name">Nome do Animal:</label>
+                <input type="text" class="form-control" id="id_animal_name" name="animal_name" required>
+            </div>
+            <div class="form-group">
+                <label for="id_animal_type">Tipo de Animal:</label>
+                <input type="text" class="form-control" id="id_animal_type" name="animal_type" required>
+            </div>
+            <div class="form-group">
+                <label for="id_age">Idade:</label>
+                <input type="number" class="form-control" id="id_age" name="age" required>
+            </div>
+            <!-- Adicione outros campos do formulário de animal aqui -->
+        </fieldset>
+
+        <!-- Informações de Saúde -->
+        <fieldset class="mt-4">
+            <legend>Informações de Saúde</legend>
+            <div class="form-group">
+                <label for="id_weight">Peso:</label>
+                <input type="number" class="form-control" id="id_weight" name="weight" required>
+            </div>
+            <div class="form-group">
+                <label for="id_height">Altura:</label>
+                <input type="number" class="form-control" id="id_height" name="height" required>
+            </div>
+            <!-- Adicione outros campos do formulário de saúde aqui -->
+        </fieldset>
+
+        <!-- Reprodução -->
+        <fieldset class="mt-4">
+            <legend>Reprodução</legend>
+            <div class="form-group">
+                <label for="id_mating_date">Data de Acasalamento:</label>
+                <input type="date" class="form-control" id="id_mating_date" name="mating_date" required>
+            </div>
+            <div class="form-group">
+                <label for="id_gestation_period">Período de Gestação (dias):</label>
+                <input type="number" class="form-control" id="id_gestation_period" name="gestation_period" required>
+            </div>
+            <!-- Adicione outros campos do formulário de reprodução aqui -->
+        </fieldset>
+
+        <!-- Peso -->
+        <fieldset class="mt-4">
+            <legend>Peso</legend>
+            <div class="form-group">
+                <label for="id_weight_value">Valor do Peso:</label>
+                <input type="number" class="form-control" id="id_weight_value" name="weight_value" required>
+            </div>
+            <div class="form-group">
+                <label for="id_weight_date">Data do Peso:</label>
+                <input type="date" class="form-control" id="id_weight_date" name="weight_date" required>
+            </div>
+            <!-- Adicione outros campos do formulário de peso aqui -->
+        </fieldset>
+
+        <!-- Adicione outros campos e grupos de informações conforme necessário -->
+
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </form>
+</div>
+{% endblock %}

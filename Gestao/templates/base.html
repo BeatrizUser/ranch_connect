@@ -1,0 +1,122 @@
+<!-- base.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Meu Site{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Adicione estilos personalizados aqui */
+        .sidebar {
+            transition: width 0.3s;
+        }
+        
+        .sidebar:hover {
+            width: 250px;
+        }
+        
+        .sidebar-sticky {
+            padding-top: 20px;
+        }
+        
+        .nav-item {
+            transition: background-color 0.3s;
+        }
+        
+        .nav-item:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 8px 16px;
+        }
+        
+        .nav-link.active {
+            background-color: #007bff;
+            color: #fff;
+        }
+        
+        .nav-link.active:hover {
+            background-color: #007bff;
+        }
+        
+        .sidebar-icon {
+            margin-right: 8px;
+        }
+        
+        .search-form {
+            margin-top: 20px;
+        }
+        
+        .search-form input {
+            width: 100%;
+            padding: 8px;
+        }
+        
+        .search-form button {
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{% url 'cadastrar_animal' %}">
+                                <i class="sidebar-icon fas fa-chart-bar"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'cadastrar_animal' %}">
+                                <i class="sidebar-icon fas fa-clipboard-list"></i>
+                                Animais
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'cadastrar_animal' %}">
+                                <i class="sidebar-icon fas fa-chart-line"></i>
+                                Cadastrar
+                            </a>
+                        </li>
+                    </ul>
+                    <form method="GET" action="{% url 'buscar_animais' search_query=search_query %}">
+                        <input type="text" name="search_query">
+                        <button type="submit">Pesquisar</button>
+                    </form>                                                                              
+                </div>
+            </nav>
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                {% block content %}
+                {% endblock %}
+            </main>
+        </div>
+    </div>
+    <script>
+        function getArrobaValue() {
+            // Faz a consulta à API
+            fetch('https://www.scotconsultoria.com.br/json/corteva/?cotacao=boigordo')
+                .then(response => response.json())
+                .then(data => {
+                    // Obtém os valores de interesse
+                    console.log(data)
+                    const cotacoes = data.Cotacao;
+                    const valores = cotacoes[6].Reais_Avista;
+
+                    // Exibe os valores na página
+                    document.getElementById('valorAtual').textContent = `Valor Atual: R$ ${valores}`;
+                })
+                .catch(error => console.error('Erro ao consultar a API:', error));
+        }
+
+        // Chamada da função ao carregar a página
+        getArrobaValue();
+    </script>
+</body>
+</html>
